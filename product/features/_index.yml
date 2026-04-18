@@ -72,3 +72,10 @@ features:
     created: 2026-04-18
     description: 允许已登录用户安全地修改账户密码
     path: user-password-change/PRD.md
+
+  - id: avatar-delete
+    name: 删除头像
+    status: planned
+    created: 2026-04-18
+    description: 允许用户删除已上传的头像，恢复为默认头像
+    path: avatar-delete/PRD.md

@@ -5,3 +5,9 @@ items:
     impact: medium
     createdAt: '2026-04-18'
     archived: false
+  - id: H-008-avatar-delete
+    title: 用户需要删除头像功能来管理个人资料
+    status: pending
+    impact: medium
+    createdAt: '2026-04-18'
+    archived: false

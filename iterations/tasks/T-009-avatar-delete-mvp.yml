@@ -1,0 +1,129 @@
+id: T-009
+title: 删除头像功能 MVP 实现
+status: planned
+priority: medium
+created: 2026-04-18
+owner: eng-brain
+estimated_hours: 24
+actual_hours: 0
+
+description: |
+  实现删除头像功能的最小可行产品（MVP），包括前端删除按钮、确认对话框、后端API和基本错误处理。
+
+details: |
+  ### 前端开发 (预计: 8小时)
+  1. 创建 `AvatarDeleteButton` React 组件
+  2. 实现确认对话框组件
+  3. 添加加载状态和成功/错误提示
+  4. 集成到用户设置页面
+  5. 实现键盘导航和无障碍支持
+  6. 移动端响应式适配
+
+  ### 后端开发 (预计: 8小时)
+  1. 创建删除头像 API 端点 (`DELETE /api/users/:userId/avatar`)
+  2. 实现权限验证（只能删除自己的头像）
+  3. 实现文件删除逻辑（本地/云存储）
+  4. 更新用户记录中的头像字段
+  5. 添加 CSRF 防护
+  6. 实现速率限制
+
+  ### 数据库变更 (预计: 4小时)
+  1. 添加 `avatar_url` 字段到 users 表（如果不存在）
+  2. 添加 `avatar_updated_at` 字段
+  3. 创建头像操作历史表（可选）
+
+  ### 测试 (预计: 4小时)
+  1. 编写单元测试（前端组件、后端控制器）
+  2. 编写集成测试（完整删除流程）
+  3. 手动测试：正常流程、错误场景、权限验证
+  4. 安全测试：CSRF、权限绕过、文件删除验证
+
+acceptance_criteria:
+  - 用户可以在个人资料页面看到"删除头像"按钮
+  - 点击删除按钮弹出确认对话框
+  - 确认对话框显示明确的警告信息
+  - 点击取消关闭对话框，头像保持不变
+  - 点击确认执行删除操作
+  - 删除成功后头像显示为默认头像
+  - 显示删除成功的提示信息
+  - 删除后可以正常上传新头像
+  - 网络错误时显示适当的错误提示
+  - 权限不足时显示权限错误提示
+  - 移动端和桌面端显示正常
+  - 支持键盘导航（Tab, Enter, Esc）
+  - 操作响应时间 < 2秒
+  - 安全要求全部满足（CSRF、权限验证）
+
+technical_spec: |
+  ### 前端技术栈
+  - **框架**: React 18+
+  - **状态管理**: React Hooks
+  - **HTTP客户端**: axios 或 fetch
+  - **UI组件**: 自定义或使用现有组件库
+  - **测试**: Jest + React Testing Library
+
+  ### 后端技术栈
+  - **框架**: Node.js + Express
+  - **数据库**: MongoDB / PostgreSQL
+  - **文件存储**: 本地文件系统（开发） / 云存储（生产）
+  - **认证**: JWT + session
+  - **测试**: Jest + Supertest
+
+  ### API 设计
+  ```http
+  DELETE /api/users/:userId/avatar
+  Authorization: Bearer <token>
+  X-CSRF-Token: <csrf_token>
+
+  响应成功 (200):
+  {
+    "success": true,
+    "message": "头像删除成功",
+    "data": {
+      "avatarUrl": "/images/default-avatar.svg",
+      "updatedAt": "2026-04-18T10:30:00Z"
+    }
+  }
+
+  响应错误 (403):
+  {
+    "error": "FORBIDDEN",
+    "message": "您没有权限删除此头像"
+  }
+  ```
+
+dependencies:
+  - 用户认证系统已就绪
+  - 头像上传功能已存在
+  - 文件存储服务可用
+  - 需要设计默认头像
+
+risks:
+  - 风险: 文件删除失败
+    缓解: 实现重试机制，记录错误日志
+  - 风险: 权限漏洞
+    缓解: 严格验证用户ID，添加审计日志
+  - 风险: 用户误删除
+    缓解: 二次确认，明确警告信息
+
+success_metrics:
+  - 功能上线后30天内，至少10%的用户使用过删除功能
+  - 删除操作成功率 > 98%
+  - 用户满意度评分 > 4/5
+
+timeline:
+  start_date: 2026-04-19
+  estimated_end: 2026-04-21
+  code_review: 2026-04-22
+  launch_date: 2026-04-23
+
+related_docs:
+  - ../../product/features/avatar-delete/PRD.md
+  - ../../product/features/avatar-delete/SDD.md
+  - ../../iterations/hypotheses/H-008-avatar-delete.md
+
+changelog:
+  - date: 2026-04-18
+    action: created
+    by: OpenWork Agent
+    note: 创建任务文档

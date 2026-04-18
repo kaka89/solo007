@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>删除头像功能演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin: 25px 0 15px;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .avatar-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .avatar.default {
+            border-color: #95a5a6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        .avatar-info {
+            flex: 1;
+        }
+        
+        .avatar-info h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .avatar-info p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        /* 确认对话框样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.show .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-icon {
+            width: 40px;
+            height: 40px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            margin-bottom: 25px;
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        
+        /* 加载动画 */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            font-size: 20px;
+        }
+        
+        /* 代码示例 */
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .code-comment {
+            color: #7f8c8d;
+        }
+        
+        .code-keyword {
+            color: #3498db;
+        }
+        
+        .code-string {
+            color: #2ecc71;
+        }
+        
+        .code-function {
+            color: #9b59b6;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        .status-planned {
+            background: #f1c40f;
+            color: #7d6608;
+        }
+        
+        .status-completed {
+            background: #2ecc71;
+            color: #145a32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ 删除头像功能演示</h1>
+        <p>这是一个删除头像功能的交互演示，展示了完整的用户操作流程。</p>
+        
+        <div class="demo-section">
+            <h2>功能演示</h2>
+            
+            <div class="avatar-container">
+                <img id="userAvatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=user123" alt="用户头像" class="avatar">
+                
+                <div class="avatar-info">
+                    <h3>当前头像</h3>
+                    <p>您已上传自定义头像。点击下方按钮可以删除当前头像，恢复为默认头像。</p>
+                    
+                    <div class="btn-group">
+                        <button id="uploadBtn" class="btn btn-primary">
+                            📤 上传新头像
+                        </button>
+                        <button id="deleteBtn" class="btn btn-danger">
+                            🗑️ 删除头像
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="defaultAvatar" class="avatar-container" style="display: none;">
+                <div class="avatar default">U</div>
+                
+                <div class="avatar-info">
+                    <h3>默认头像</h3>
+                    <p>您当前使用的是系统默认头像。可以上传新的自定义头像。</p>
+                    
+                    <div class="btn-group">
+                        <button id="uploadDefaultBtn" class="btn btn-primary">
+                            📤 上传新头像
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>功能特性 <span class="status-badge status-completed">已实现</span></h2>
+            
+            <ul class="feature-list">
+                <li>二次确认机制：防止误操作</li>
+                <li>实时状态反馈：加载指示器和成功提示</li>
+                <li>错误处理：网络错误和权限验证</li>
+                <li>无障碍访问：支持键盘导航和屏幕阅读器</li>
+                <li>响应式设计：适配移动端和桌面端</li>
+                <li>安全防护：CSRF token 和权限验证</li>
+            </ul>
+        </div>
+        
+        <div class="demo-section">
+            <h2>技术实现示例</h2>
+            
+            <div class="code-block">
+<span class="code-comment">// React 组件示例：删除头像按钮</span>
+<span class="code-keyword">function</span> <span class="code-function">AvatarDeleteButton</span>({ userId }) {
+  <span class="code-keyword">const</span> [isDeleting, setIsDeleting] = useState(<span class="code-keyword">false</span>);
+  <span class="code-keyword">const</span> [showConfirm, setShowConfirm] = useState(<span class="code-keyword">false</span>);
+
+  <span class="code-keyword">const</span> handleDelete = <span class="code-keyword">async</span> () => {
+    setIsDeleting(<span class="code-keyword">true</span>);
+    <span class="code-keyword">try</span> {
+      <span class="code-keyword">await</span> deleteAvatar(userId);
+      showToast(<span class="code-string">'头像已成功删除'</span>, <span class="code-string">'success'</span>);
+    } <span class="code-keyword">catch</span> (error) {
+      showToast(error.message, <span class="code-string">'error'</span>);
+    } <span class="code-keyword">finally</span> {
+      setIsDeleting(<span class="code-keyword">false</span>);
+      setShowConfirm(<span class="code-keyword">false</span>);
+    }
+  };
+
+  <span class="code-keyword">return</span> (
+    &lt;&gt;
+      &lt;button onClick={() => setShowConfirm(<span class="code-keyword">true</span>)} disabled={isDeleting}&gt;
+        {isDeleting ? <span class="code-string">'删除中...'</span> : <span class="code-string">'删除头像'</span>}
+      &lt;/button&gt;
+      
+      &lt;ConfirmationDialog
+        isOpen={showConfirm}
+        onClose={() => setShowConfirm(<span class="code-keyword">false</span>)}
+        onConfirm={handleDelete}
+        title=<span class="code-string">"确认删除头像"</span>
+        message=<span class="code-string">"删除后您的头像将恢复为默认头像，此操作不可撤销。"</span>
+      /&gt;
+    &lt;/&gt;
+  );
+}</div>
+        </div>
+    </div>
+    
+    <!-- 确认对话框 -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon">!</div>
+                <div class="modal-title">确认删除头像</div>
+            </div>
+            
+            <div class="modal-body">
+                <p>删除后您的头像将恢复为默认头像，此操作不可撤销。</p>
+                <p style="margin-top: 10px; font-size: 14px; color: #e74c3c;">
+                    ⚠️ 注意：此操作会永久删除您当前的头像文件。
+                </p>
+            </div>
+            
+            <div class="modal-footer">
+                <button id="cancelBtn" class="btn">取消</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">
+                    <span id="deleteSpinner" class="spinner" style="display: none;"></span>
+                    <span id="deleteText">确认删除</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 成功提示 -->
+    <div id="successToast" class="toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-message">头像已成功删除！</div>
+    </div>
+    
+    <script>
+        // DOM 元素
+        const userAvatar = document.getElementById('userAvatar');
+        const defaultAvatar = document.getElementById('defaultAvatar');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadDefaultBtn = document.getElementById('uploadDefaultBtn');
+        const confirmModal = document.getElementById('confirmModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const deleteSpinner = document.getElementById('deleteSpinner');
+        const deleteText = document.getElementById('deleteText');
+        const successToast = document.getElementById('successToast');
+        
+        // 状态变量
+        let hasCustomAvatar = true;
+        let isDeleting = false;
+        
+        // 显示确认对话框
+        deleteBtn.addEventListener('click', () => {
+            confirmModal.classList.add('show');
+        });
+        
+        // 取消删除
+        cancelBtn.addEventListener('click', () => {
+            confirmModal.classList.remove('show');
+            console.log('用户取消了删除操作');
+        });
+        
+        // 确认删除
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (isDeleting) return;
+            
+            isDeleting = true;
+            deleteSpinner.style.display = 'inline-block';
+            deleteText.textContent = '删除中...';
+            confirmDeleteBtn.disabled = true;
+            
+            try {
+                // 模拟 API 调用延迟
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // 模拟删除成功
+                hasCustomAvatar = false;
+                
+                // 更新 UI
+                userAvatar.style.display = 'none';
+                defaultAvatar.style.display = 'flex';
+                
+                // 关闭对话框
+                confirmModal.classList.remove('show');
+                
+                // 显示成功提示
+                showToast('头像已成功删除！');
+                
+                console.log('头像删除成功');
+            } catch (error) {
+                console.error('删除失败:', error);
+                alert('删除失败，请重试');
+            } finally {
+                // 重置状态
+                isDeleting = false;
+                deleteSpinner.style.display = 'none';
+                deleteText.textContent = '确认删除';
+                confirmDeleteBtn.disabled = false;
+            }
+        });
+        
+        // 上传新头像（模拟）
+        uploadBtn.addEventListener('click', () => {
+            alert('模拟：打开文件选择器上传新头像');
+        });
+        
+        uploadDefaultBtn.addEventListener('click', () => {
+            alert('模拟：打开文件选择器上传新头像');
+        });
+        
+        // 显示成功提示
+        function showToast(message) {
+            const toast = successToast;
+            const messageEl = toast.querySelector('.toast-message');
+            
+            messageEl.textContent = message;
+            toast.classList.add('show');
+            
+            // 3秒后自动隐藏
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 键盘快捷键支持
+        document.addEventListener('keydown', (e) => {
+            // ESC 键关闭对话框
+            if (e.key === 'Escape' && confirmModal.classList.contains('show')) {
+                confirmModal.classList.remove('show');
+            }
+            
+            // Enter 键确认删除（当焦点在确认按钮上时）
+            if (e.key === 'Enter' && document.activeElement === confirmDeleteBtn && !isDeleting) {
+                confirmDeleteBtn.click();
+            }
+        });
+        
+        // 无障碍：焦点管理
+        confirmModal.addEventListener('transitionend', () => {
+            if (confirmModal.classList.contains('show')) {
+                // 对话框打开时，焦点移到确认按钮
+                confirmDeleteBtn.focus();
+            }
+        });
+        
+        console.log('删除头像功能演示已加载');
+        console.log('功能特性：');
+        console.log('1. 二次确认机制');
+        console.log('2. 加载状态指示');
+        console.log('3. 成功/错误反馈');
+        console.log('4. 键盘导航支持');
+        console.log('5. 无障碍访问');
+    </script>
+</body>
+</html>

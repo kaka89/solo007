@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度首页 Demo - 功能测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-pass {
+            color: green;
+            font-weight: bold;
+        }
+        .test-fail {
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            background: #4e6ef2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #315efb;
+        }
+    </style>
+</head>
+<body>
+    <h1>百度首页 Demo - 功能测试</h1>
+    
+    <div class="test-section">
+        <h2>1. 文件检查</h2>
+        <p id="file-check">检查中...</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. 基本功能测试</h2>
+        <button onclick="testAlert()">测试弹窗功能</button>
+        <button onclick="testConsole()">测试控制台输出</button>
+        <button onclick="testLocalStorage()">测试本地存储</button>
+        <p id="basic-test-result"></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. 跳转到主页面</h2>
+        <button onclick="window.location.href='baidu-demo.html'">打开百度首页Demo</button>
+        <p>点击按钮将在当前窗口打开主页面</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. 浏览器兼容性</h2>
+        <p id="browser-info">检测中...</p>
+    </div>
+    
+    <script>
+        // 文件检查
+        function checkFiles() {
+            const files = ['baidu-demo.html', 'server.py', 'README.md'];
+            const results = [];
+            
+            files.forEach(file => {
+                // 尝试通过fetch检查文件是否存在
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            results.push(`<span class="test-pass">✓ ${file}</span>`);
+                        } else {
+                            results.push(`<span class="test-fail">✗ ${file}</span>`);
+                        }
+                    })
+                    .catch(() => {
+                        results.push(`<span class="test-fail">✗ ${file} (访问失败)</span>`);
+                    })
+                    .finally(() => {
+                        if (results.length === files.length) {
+                            document.getElementById('file-check').innerHTML = results.join('<br>');
+                        }
+                    });
+            });
+        }
+        
+        // 测试弹窗功能
+        function testAlert() {
+            alert('弹窗功能正常！');
+            document.getElementById('basic-test-result').innerHTML = 
+                '<span class="test-pass">✓ 弹窗功能测试通过</span>';
+        }
+        
+        // 测试控制台输出
+        function testConsole() {
+            console.log('控制台输出测试 - 时间:', new Date().toLocaleString());
+            document.getElementById('basic-test-result').innerHTML = 
+                '<span class="test-pass">✓ 控制台输出测试通过 (请查看浏览器控制台)</span>';
+        }
+        
+        // 测试本地存储
+        function testLocalStorage() {
+            try {
+                localStorage.setItem('test_key', 'test_value');
+                const value = localStorage.getItem('test_key');
+                if (value === 'test_value') {
+                    localStorage.removeItem('test_key');
+                    document.getElementById('basic-test-result').innerHTML = 
+                        '<span class="test-pass">✓ 本地存储测试通过</span>';
+                } else {
+                    document.getElementById('basic-test-result').innerHTML = 
+                        '<span class="test-fail">✗ 本地存储测试失败</span>';
+                }
+            } catch (e) {
+                document.getElementById('basic-test-result').innerHTML = 
+                    `<span class="test-fail">✗ 本地存储测试失败: ${e.message}</span>`;
+            }
+        }
+        
+        // 检测浏览器信息
+        function detectBrowser() {
+            const info = [];
+            info.push(`用户代理: ${navigator.userAgent}`);
+            info.push(`语言: ${navigator.language}`);
+            info.push(`在线状态: ${navigator.onLine ? '在线' : '离线'}`);
+            info.push(`Cookie启用: ${navigator.cookieEnabled ? '是' : '否'}`);
+            info.push(`JavaScript启用: 是`);
+            info.push(`屏幕分辨率: ${screen.width}×${screen.height}`);
+            
+            document.getElementById('browser-info').innerHTML = info.join('<br>');
+        }
+        
+        // 页面加载完成后执行
+        window.onload = function() {
+            checkFiles();
+            detectBrowser();
+        };
+    </script>
+</body>
+</html>

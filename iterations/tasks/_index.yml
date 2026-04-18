@@ -64,3 +64,12 @@ items:
     hypothesis: H-007
     createdAt: 2026-04-18
     archived: false
+
+  - id: T-009
+    title: 删除头像功能 MVP 实现
+    status: todo
+    type: dev
+    feature: avatar-delete
+    hypothesis: H-008
+    createdAt: 2026-04-18
+    archived: false
