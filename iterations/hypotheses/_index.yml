@@ -1,66 +1,7 @@
 items:
-  # ── 已有假设（保留） ──
-  - id: H-001-limit-right-wrong
-    title: 额度是非得失
-    status: testing
-    createdAt: '2026-04-17'
-    impact: medium
-
-  # ── Mock 测试数据 ──
-  - id: H-001
-    title: 用户需要「段落一键重写」功能
-    status: testing
-    feature: paragraph-rewrite
-    impact: high
-    createdAt: 2026-04-07
-    archived: false
-
-  - id: H-002
-    title: 团队协作功能是用户付费的核心驱动力
-    status: testing
-    impact: high
-    createdAt: 2026-04-01
-    archived: false
-
-  - id: H-003
-    title: 语音输入能提升低键盘效率用户的留存
+  - id: h-1776486809471
+    title: 需要一个语音输入的功能
     status: testing
     impact: medium
-    createdAt: 2026-04-05
-    archived: false
-
-  - id: H-004
-    title: 每日写作目标提醒能提升打开率
-    status: validated
-    feature: daily-writing-reminder
-    impact: high
-    createdAt: 2026-03-20
-    validatedAt: 2026-04-01
-    archived: false
-
-  - id: H-005
-    title: Dark Mode 是用户流失的原因之一
-    status: validated
-    feature: dark-mode
-    impact: medium
-    createdAt: 2026-03-10
-    validatedAt: 2026-03-28
-    archived: false
-
-  - id: H-006
-    title: AI 自动生成大纲能成为核心功能
-    status: invalidated
-    feature: outline-generation
-    impact: low
-    createdAt: 2026-02-20
-    validatedAt: 2026-03-25
-    archived: false
-
-  # ── 新增假设 ──
-  - id: H-007
-    title: 用户需要并会使用自助密码修改功能
-    status: testing
-    feature: user-password-change
-    impact: medium
-    createdAt: 2026-04-18
+    createdAt: '2026-04-18'
     archived: false
