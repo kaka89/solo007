@@ -29,11 +29,12 @@ features:
     brief: 每日 20:30 推送写作提醒，提升用户打开率
 
   - id: dark-mode
-    name: 深色模式
+    name: 主题模式
     status: ga
     hypothesis: H-005
     since: v1.2.2
-    brief: 全局深色模式支持
+    updated: 2026-04-18
+    brief: 支持浅色/深色/彩色主题模式切换，包含5个预设彩色主题
 
   - id: ai-continuation
     name: AI 续写
