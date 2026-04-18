@@ -1,10 +1,12 @@
 features:
   # ── 已有功能（保留） ──
   - name: phone-login
-    title: 手机号登录
+    title: 手机号登录（含区号验证、虚拟手机号和美国手机号支持）
     status: planned
     created: 2026-04-17
-    description: 通过手机号接收验证码进行登录，支持自动注册
+    updated: 2026-04-18
+    version: v1.4
+    description: 通过手机号接收验证码进行登录，支持国际区号验证、虚拟手机号识别、美国手机号支持和自动注册
     path: phone-login/PRD.md
   - name: email-login
     title: 邮箱登录
@@ -82,8 +84,10 @@ features:
     path: avatar-delete/PRD.md
 
   - id: international-phone-validation
-    name: 国际手机号有效性验证
+    name: 国际手机号有效性验证（含区号验证）
     status: planned
     created: 2026-04-18
-    description: 支持全球主要国家手机号格式验证和验证码发送
+    updated: 2026-04-18
+    version: v1.2.0
+    description: 支持全球主要国家手机号格式验证、区号验证和验证码发送，包含美国手机号完整支持
     path: international-phone-validation/PRD.md

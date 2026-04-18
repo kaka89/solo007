@@ -82,3 +82,37 @@ items:
     hypothesis: H-009
     createdAt: 2026-04-18
     archived: false
+
+  - id: T-011
+    title: 手机号登录验证码验证逻辑增强
+    status: todo
+    type: dev
+    feature: phone-login
+    createdAt: 2026-04-18
+    archived: false
+
+  - id: T-012
+    title: 区号验证逻辑增强
+    status: todo
+    type: dev
+    feature: phone-login
+    createdAt: 2026-04-18
+    archived: false
+
+  - id: T-013
+    title: 虚拟手机号登录能力增强
+    status: in_progress
+    type: dev
+    feature: phone-login
+    hypothesis: H-013
+    createdAt: 2026-04-18
+    archived: false
+
+  - id: T-014
+    title: 美国手机号登录能力实现
+    status: todo
+    type: dev
+    feature: phone-login
+    hypothesis: H-014
+    createdAt: 2026-04-18
+    archived: false

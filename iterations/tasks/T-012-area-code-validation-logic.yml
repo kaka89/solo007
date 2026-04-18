@@ -1,0 +1,205 @@
+id: T-012
+title: 手机号登录区号验证逻辑实现
+status: planned
+priority: high
+created: 2026-04-18
+owner: eng-brain
+estimated_hours: 24
+actual_hours: 0
+
+description: |
+  实现手机号登录的区号验证逻辑，包括区号格式验证、有效性验证、组合验证、安全防护等功能。
+
+details: |
+  ### 需求分析和技术设计 (预计: 4小时)
+  1. 分析PRD中的区号验证需求
+  2. 设计区号验证的技术架构
+  3. 选择区号验证库（libphonenumber）
+  4. 设计数据库表结构变更
+  5. 制定API接口规范
+  6. 设计安全防护策略
+
+  ### 后端开发 (预计: 12小时)
+  1. **区号验证服务层**：
+     - 实现区号格式验证（E.164标准）
+     - 实现区号有效性验证
+     - 实现区号支持性验证
+     - 实现区号与手机号组合验证
+
+  2. **区号安全防护**：
+     - 实现区号黑名单管理
+     - 实现区号频率限制
+     - 实现区号攻击检测
+     - 实现高风险区号识别
+
+  3. **API接口开发**：
+     - 国家/地区列表接口
+     - 区号验证接口
+     - 基于IP的国家识别接口
+     - 区号统计接口
+
+  4. **数据库变更**：
+     - 添加国家/地区数据表
+     - 添加区号黑名单表
+     - 添加区号使用统计表
+     - 更新用户表支持国际手机号
+
+  5. **缓存优化**：
+     - 国家/地区数据缓存
+     - 区号验证结果缓存
+     - 高频区号缓存
+
+  ### 前端开发 (预计: 6小时)
+  1. **国家选择组件**：
+     - 开发国家选择下拉框
+     - 实现搜索功能
+     - 实现常用国家置顶
+     - 显示国旗和国家名称
+
+  2. **区号输入组件**：
+     - 开发区号输入框
+     - 实现实时格式验证
+     - 实现自动格式化
+     - 实现错误提示
+
+  3. **智能识别功能**：
+     - 基于IP自动识别国家
+     - 基于用户历史推荐国家
+     - 智能区号补全
+
+  4. **用户体验优化**：
+     - 多语言错误提示
+     - 加载状态显示
+     - 离线支持（缓存国家数据）
+
+  ### 测试和部署 (预计: 2小时)
+  1. 单元测试和集成测试
+  2. 性能测试（区号验证响应时间）
+  3. 安全测试（防止区号攻击）
+  4. 部署到测试环境
+  5. 监控配置（区号验证成功率、错误率）
+
+acceptance_criteria:
+  - 区号格式验证符合E.164标准
+  - 支持至少50个国家的区号验证
+  - 区号验证响应时间 < 100ms
+  - 基于IP的国家识别准确率 > 95%
+  - 国家选择组件支持搜索和常用国家置顶
+  - 区号黑名单机制生效
+  - 区号频率限制生效
+  - 完整的错误处理和用户提示
+  - 向后兼容现有中国大陆手机号用户
+
+technical_spec: |
+  ### 前端技术栈
+  - **框架**: React 18+
+  - **状态管理**: React Hooks + Context
+  - **HTTP客户端**: axios
+  - **UI组件**: 自定义国家选择组件
+  - **国际化**: react-i18next
+  - **IP识别**: ipapi.co 或类似服务
+  - **测试**: Jest + React Testing Library
+
+  ### 后端技术栈
+  - **框架**: Node.js + Express
+  - **数据库**: MongoDB + Redis
+  - **区号验证**: libphonenumber-js
+  - **IP识别**: ipapi.co API 或自建IP库
+  - **缓存**: Redis
+  - **测试**: Jest + Supertest
+
+  ### API 设计
+  ```http
+  # 获取国家列表
+  GET /api/countries
+  查询参数:
+    - search: 搜索关键词
+    - limit: 返回数量限制
+  响应:
+  {
+    "success": true,
+    "data": [
+      {
+        "code": "CN",
+        "name": "China",
+        "name_zh": "中国",
+        "dialCode": "+86",
+        "flag": "🇨🇳",
+        "priority": 1
+      }
+    ]
+  }
+
+  # 验证区号
+  POST /api/validate/area-code
+  Body:
+  {
+    "areaCode": "+86",
+    "phoneNumber": "13800138000"
+  }
+  响应:
+  {
+    "success": true,
+    "data": {
+      "isValid": true,
+      "countryCode": "CN",
+      "countryName": "China",
+      "formattedNumber": "+86 138 0013 8000",
+      "carrier": "China Mobile"
+    }
+  }
+
+  # 基于IP识别国家
+  GET /api/geo/ip-info
+  响应:
+  {
+    "success": true,
+    "data": {
+      "countryCode": "CN",
+      "countryName": "China",
+      "recommendedAreaCode": "+86"
+    }
+  }
+  ```
+
+dependencies:
+  - libphonenumber-js 库
+  - IP地理位置服务
+  - 国际短信服务商（用于验证码发送）
+  - 前端UI组件库支持
+  - 用户认证系统已就绪
+
+risks:
+  - 风险: 区号验证库不准确或过时
+    缓解: 定期更新库版本，添加手动验证规则
+  - 风险: IP识别不准确
+    缓解: 使用多家IP服务商，添加手动选择
+  - 风险: 性能问题（大量国家数据）
+    缓解: 实施Redis缓存，分页加载
+  - 风险: 安全漏洞（区号伪造）
+    缓解: 服务端严格验证，防止客户端篡改
+
+success_metrics:
+  - 区号验证成功率 > 99%
+  - 区号验证响应时间 < 100ms
+  - 基于IP的国家识别准确率 > 95%
+  - 用户注册转化率提升
+  - 无区号相关安全事件
+
+timeline:
+  start_date: 2026-04-19
+  estimated_end: 2026-04-22
+  code_review: 2026-04-23
+  launch_date: 2026-04-24
+
+related_docs:
+  - ../../product/features/phone-login/PRD.md
+  - ../../product/features/international-phone-validation/PRD.md
+  - ../../iterations/hypotheses/H-009-international-phone-validation.md
+  - ../../iterations/tasks/T-010-international-phone-validation-mvp.yml
+
+changelog:
+  - date: 2026-04-18
+    action: created
+    by: OpenWork Agent
+    note: 创建区号验证逻辑实现任务
