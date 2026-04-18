@@ -11,3 +11,9 @@ items:
     impact: medium
     createdAt: '2026-04-18'
     archived: false
+  - id: H-009-international-phone-validation
+    title: 国际手机号有效性验证功能将提升海外用户注册转化率
+    status: pending
+    impact: high
+    createdAt: '2026-04-18'
+    archived: false

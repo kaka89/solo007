@@ -79,3 +79,10 @@ features:
     created: 2026-04-18
     description: 允许用户删除已上传的头像，恢复为默认头像
     path: avatar-delete/PRD.md
+
+  - id: international-phone-validation
+    name: 国际手机号有效性验证
+    status: planned
+    created: 2026-04-18
+    description: 支持全球主要国家手机号格式验证和验证码发送
+    path: international-phone-validation/PRD.md

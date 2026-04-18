@@ -73,3 +73,12 @@ items:
     hypothesis: H-008
     createdAt: 2026-04-18
     archived: false
+
+  - id: T-010
+    title: 国际手机号验证 MVP 实现
+    status: todo
+    type: dev
+    feature: international-phone-validation
+    hypothesis: H-009
+    createdAt: 2026-04-18
+    archived: false
