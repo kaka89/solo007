@@ -1,0 +1,76 @@
+businessMetrics:
+  - key: dau
+    label: DAU
+    value: 142
+    unit: 人
+    trend: up
+    trendValue: "+12% vs 上周"
+    color: "#1264e5"
+    good: true
+
+  - key: mrr
+    label: MRR
+    value: "$1,240"
+    trend: up
+    trendValue: "+$180 vs 上月"
+    color: "#52c41a"
+    good: true
+
+  - key: retention
+    label: 7日留存
+    value: "68%"
+    trend: stable
+    trendValue: "±1% vs 上周"
+    color: "#722ed1"
+    good: true
+
+  - key: nps
+    label: NPS
+    value: 42
+    trend: up
+    trendValue: "+5 vs 上月"
+    color: "#faad14"
+    good: true
+
+metricsHistory:
+  - week: W1
+    dau: 58
+    mrr: 620
+    retention: 61
+  - week: W2
+    dau: 74
+    mrr: 720
+    retention: 63
+  - week: W3
+    dau: 89
+    mrr: 820
+    retention: 65
+  - week: W4
+    dau: 105
+    mrr: 940
+    retention: 66
+  - week: W5
+    dau: 127
+    mrr: 1060
+    retention: 67
+  - week: W6
+    dau: 142
+    mrr: 1240
+    retention: 68
+
+featureUsage:
+  - feature: AI 续写
+    usage: 89
+    trend: up
+  - feature: 段落精修
+    usage: 72
+    trend: up
+  - feature: 风格转换
+    usage: 54
+    trend: stable
+  - feature: 大纲生成
+    usage: 38
+    trend: up
+  - feature: 引用检查
+    usage: 12
+    trend: down

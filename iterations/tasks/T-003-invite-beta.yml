@@ -1,0 +1,10 @@
+id: T-003
+title: 邀请 5 位用户内测重写功能
+feature: paragraph-rewrite
+type: product
+status: todo
+est: 1h
+dod:
+  - 发送邀请邮件
+  - 建立反馈收集表单
+createdAt: 2026-04-09

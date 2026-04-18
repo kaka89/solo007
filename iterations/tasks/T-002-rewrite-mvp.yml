@@ -1,0 +1,12 @@
+id: T-002
+title: 实现段落重写功能（MVP）
+feature: paragraph-rewrite
+type: dev
+status: todo
+est: 2d
+hypothesis: H-001
+dod:
+  - 选中段落后出现重写按钮
+  - 调用 GPT-4o 重写
+  - Loading 态 + 错误处理
+createdAt: 2026-04-09

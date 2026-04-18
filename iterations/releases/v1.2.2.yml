@@ -1,0 +1,9 @@
+version: v1.2.2
+date: 2026-04-03
+env: prod
+status: success
+deployTime: 1m 58s
+features:
+  - dark-mode
+summary: Dark Mode 全量上线，性能优化
+tasks: []

@@ -1,0 +1,100 @@
+version: "2.0"
+mode: solo
+generated-at: "2026-04-16T14:26:07.408Z"
+
+# ── Solo 扁平结构（活文档 + 增量文档 + 知识库） ──
+areas:
+  - id: product
+    name: 活文档
+    path: product/
+    description: 产品当前全貌（SSOT），持续更新
+    contains: [overview, roadmap, features, prd, sdd]
+  - id: iterations
+    name: 增量文档
+    path: iterations/
+    description: 执行过程记录，只增不改
+    contains: [hypothesis, task, release, archive]
+  - id: knowledge
+    name: 个人知识库
+    path: knowledge/
+    description: 踩坑记录、用户洞察、技术笔记
+    contains: [pitfall, user-insight, tech-note]
+  - id: runtime
+    name: 运行时数据
+    path: ./
+    description: 今日焦点、商业指标、功能开关、架构决策
+    contains: [focus, metrics, feature-flags, adrs]
+  - id: code
+    name: 源代码
+    path: code/
+    description: 产品源代码容器，按需包含前端(web/)、后端(server/)、共享包(shared/)等子工程
+    contains: [frontend, backend, shared]
+
+# ── 文档类型 ──
+doc-types:
+  PRD:
+    name: 产品需求文档（活文档）
+    category: living
+    location: "product/features/{feature}/PRD.md"
+    owner: product-brain
+  SDD:
+    name: 系统设计文档（活文档）
+    category: living
+    location: "product/features/{feature}/SDD.md"
+    owner: eng-brain
+    upstream: [PRD]
+  Hypothesis:
+    name: 产品假设
+    category: incremental
+    naming: "H-{NNN}-{name}.md"
+    location: "iterations/hypotheses/"
+    owner: product-brain
+    index: _index.yml
+  Task:
+    name: 开发任务
+    category: incremental
+    naming: "T-{NNN}-{name}.yml"
+    location: "iterations/tasks/"
+    owner: eng-brain
+    index: _index.yml
+  Release:
+    name: 发布记录
+    category: incremental
+    naming: "v{x.y.z}.yml"
+    location: "iterations/releases/"
+    owner: ops-brain
+  Knowledge:
+    name: 知识条目
+    category: incremental
+    naming: "K-{NNN}-{name}.md"
+    location: "knowledge/{category}/"
+    owner: all
+    index: _index.yml
+
+# ── 回写链路 ──
+writeback:
+  - trigger: task.status == done
+    source: task.changelog
+    target: "product/features/{task.feature}/SDD.md"
+  - trigger: hypothesis.status in [validated, invalidated]
+    source: hypothesis.result
+    target: "product/features/{hypothesis.feature}/PRD.md"
+
+# ── Agent 产出映射 ──
+agents:
+  product-brain:
+    outputs:
+      - { type: PRD, path: "product/features/{feat}/PRD.md" }
+      - { type: Hypothesis, path: "iterations/hypotheses/" }
+      - { type: Roadmap, path: "product/roadmap.md" }
+  eng-brain:
+    outputs:
+      - { type: SDD, path: "product/features/{feat}/SDD.md" }
+      - { type: Task, path: "iterations/tasks/" }
+      - { type: Code, path: "code/" }
+  growth-brain:
+    outputs:
+      - { type: Knowledge, path: "knowledge/insights/" }
+  ops-brain:
+    outputs:
+      - { type: Release, path: "iterations/releases/" }

@@ -1,0 +1,17 @@
+{
+  "sessions": [
+    {
+      "id": "session-1776474774766",
+      "goal": "你好",
+      "startedAt": "2026-04-18T03:02:51.776Z",
+      "messages": [
+        {
+          "type": "user",
+          "text": "你好",
+          "time": "09:12",
+          "id": "msg-1776474779659-6fmp"
+        }
+      ]
+    }
+  ]
+}

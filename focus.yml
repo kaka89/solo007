@@ -1,0 +1,26 @@
+items:
+  - id: f1
+    priority: urgent
+    category: dev
+    title: 修复 Editor 光标丢失 bug
+    reason: 5 位用户反馈此问题，影响核心使用体验，已有 2 天未解决
+    action: 去构建中
+    linkedRoute: /solo/build
+    linkedTask: T-001
+
+  - id: f2
+    priority: important
+    category: growth
+    title: 回复 Product Hunt 评论区 8 条留言
+    reason: 昨日上线后有用户提问，及时回复有助于转化和口碑
+    action: 去处理
+    linkedTask: T-004
+
+  - id: f3
+    priority: important
+    category: product
+    title: 验证「段落重写」功能假设
+    reason: 这是本周最高优先级假设，已收集到 3 个用户测试意愿
+    action: 去产品洞察
+    linkedRoute: /solo/product
+    linkedHypothesis: H-001

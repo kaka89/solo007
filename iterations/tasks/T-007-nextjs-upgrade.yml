@@ -1,0 +1,14 @@
+id: T-007
+title: 升级 Next.js 14 → 15
+type: dev
+status: done
+est: 3h
+dod:
+  - 依赖升级
+  - 破坏性变更处理
+  - 生产验证
+createdAt: 2026-04-05
+completedAt: 2026-04-07
+changelog: |
+  完成 Next.js 14 到 15 的依赖升级，处理了所有破坏性变更。
+  生产环境验证通过，包含在 v1.2.3 发布中。

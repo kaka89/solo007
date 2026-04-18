@@ -1,0 +1,14 @@
+flags:
+  - id: ff1
+    name: paragraph-rewrite-beta
+    description: 段落重写功能 Beta
+    enabled: true
+    rollout: 10
+    environment: prod
+
+  - id: ff2
+    name: voice-input
+    description: 语音输入（验证中）
+    enabled: true
+    rollout: 50
+    environment: prod

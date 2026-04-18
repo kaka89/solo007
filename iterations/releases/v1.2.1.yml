@@ -1,0 +1,7 @@
+version: v1.2.1
+date: 2026-03-28
+env: prod
+status: rolledback
+deployTime: "—"
+summary: AI 续写延迟优化 — 回滚（Stream 解析崩溃）
+tasks: []

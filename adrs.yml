@@ -1,0 +1,24 @@
+items:
+  - id: adr1
+    title: AI 模型选型
+    question: 使用 GPT-4o 还是 Claude 3.5 Sonnet？
+    decision: 主力使用 GPT-4o，长文档摘要降级到 GPT-4o-mini
+    reason: 中文写作质量 GPT-4o > Claude，成本用 mini 兜底
+    date: 2026-03-01
+    status: active
+
+  - id: adr2
+    title: 编辑器技术选型
+    question: 用 ProseMirror、TipTap 还是 Quill？
+    decision: 选 TipTap（基于 ProseMirror）
+    reason: 开发体验更好，Extension 生态完善，有商业支持
+    date: 2026-02-15
+    status: active
+
+  - id: adr3
+    title: 数据库选型
+    question: 用 PlanetScale（MySQL）还是 Supabase（Postgres）？
+    decision: 选 Supabase
+    reason: 自带 Auth + Storage，减少集成工作量；Postgres 生态更强
+    date: 2026-02-10
+    status: active

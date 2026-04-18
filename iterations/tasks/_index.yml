@@ -1,0 +1,66 @@
+items:
+  - id: T-001
+    title: 修复 Editor 光标丢失 bug
+    status: doing
+    type: dev
+    feature: paragraph-rewrite
+    createdAt: 2026-04-08
+    archived: false
+
+  - id: T-002
+    title: 实现段落重写功能（MVP）
+    status: todo
+    type: dev
+    feature: paragraph-rewrite
+    hypothesis: H-001
+    createdAt: 2026-04-09
+    archived: false
+
+  - id: T-003
+    title: 邀请 5 位用户内测重写功能
+    status: todo
+    type: product
+    feature: paragraph-rewrite
+    createdAt: 2026-04-09
+    archived: false
+
+  - id: T-004
+    title: 回复 Product Hunt 评论
+    status: todo
+    type: growth
+    createdAt: 2026-04-10
+    archived: false
+
+  - id: T-005
+    title: 更新落地页 — 加入 Dark Mode 截图
+    status: todo
+    type: growth
+    feature: dark-mode
+    createdAt: 2026-04-09
+    archived: false
+
+  - id: T-006
+    title: 配置 PostHog 用户行为追踪
+    status: done
+    type: ops
+    createdAt: 2026-04-07
+    completedAt: 2026-04-07
+    archived: false
+
+  - id: T-007
+    title: 升级 Next.js 14 → 15
+    status: done
+    type: dev
+    createdAt: 2026-04-05
+    completedAt: 2026-04-07
+    archived: false
+
+  # ── 新增任务 ──
+  - id: T-008
+    title: 用户修改密码 MVP 开发
+    status: todo
+    type: dev
+    feature: user-password-change
+    hypothesis: H-007
+    createdAt: 2026-04-18
+    archived: false

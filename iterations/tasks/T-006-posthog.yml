@@ -1,0 +1,14 @@
+id: T-006
+title: 配置 PostHog 用户行为追踪
+type: ops
+status: done
+est: 2h
+dod:
+  - 集成 SDK
+  - 关键事件埋点
+  - 验证数据上报
+createdAt: 2026-04-07
+completedAt: 2026-04-07
+changelog: |
+  集成 PostHog SDK，完成页面浏览、用户登录、自定义事件的埋点配置。
+  数据上报 PostHog 控制台验证通过。

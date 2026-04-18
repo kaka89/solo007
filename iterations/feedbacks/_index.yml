@@ -1,0 +1,35 @@
+items:
+  - id: FB-001
+    user: "@alice_writes"
+    channel: Product Hunt
+    sentiment: positive
+    date: 2026-04-09
+    archived: false
+
+  - id: FB-002
+    user: 匿名用户
+    channel: In-app
+    sentiment: negative
+    date: 2026-04-08
+    archived: false
+
+  - id: FB-003
+    user: "@davidchen"
+    channel: Twitter
+    sentiment: positive
+    date: 2026-04-07
+    archived: false
+
+  - id: FB-004
+    user: "zhuming@corp.com"
+    channel: Email
+    sentiment: neutral
+    date: 2026-04-06
+    archived: false
+
+  - id: FB-005
+    user: "@writer_li"
+    channel: In-app
+    sentiment: positive
+    date: 2026-04-05
+    archived: false

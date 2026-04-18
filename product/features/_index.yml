@@ -1,0 +1,74 @@
+features:
+  # ── 已有功能（保留） ──
+  - name: phone-login
+    title: 手机号登录
+    status: planned
+    created: 2026-04-17
+    description: 通过手机号接收验证码进行登录，支持自动注册
+    path: phone-login/PRD.md
+  - name: email-login
+    title: 邮箱登录
+    status: planned
+    created: 2026-04-17
+    description: 通过邮箱接收验证码进行登录，支持自动注册
+    path: email-login/PRD.md
+
+  # ── Mock 测试数据 ──
+  - id: paragraph-rewrite
+    name: 段落一键重写
+    status: beta
+    hypothesis: H-001
+    since: v1.3.0
+    brief: 选中段落后 AI 一键重写，保留原意
+
+  - id: daily-writing-reminder
+    name: 每日写作提醒
+    status: ga
+    hypothesis: H-004
+    since: v1.2.0
+    brief: 每日 20:30 推送写作提醒，提升用户打开率
+
+  - id: dark-mode
+    name: 深色模式
+    status: ga
+    hypothesis: H-005
+    since: v1.2.2
+    brief: 全局深色模式支持
+
+  - id: ai-continuation
+    name: AI 续写
+    status: ga
+    since: v1.0.0
+    brief: 基于上下文智能续写内容
+
+  - id: paragraph-polish
+    name: 段落精修
+    status: ga
+    since: v1.0.0
+    brief: AI 辅助优化段落表达质量
+
+  - id: style-transfer
+    name: 风格转换
+    status: ga
+    since: v1.1.0
+    brief: 一键切换正式/口语/文学等写作风格
+
+  - id: outline-generation
+    name: 大纲生成
+    status: ga
+    since: v1.1.9
+    brief: AI 根据主题自动生成文章大纲
+
+  - id: citation-check
+    name: 引用检查
+    status: ga
+    since: v1.1.9
+    brief: 自动检测并验证文本引用来源
+
+  # ── 新增功能 ──
+  - id: user-password-change
+    name: 用户修改密码
+    status: planned
+    created: 2026-04-18
+    description: 允许已登录用户安全地修改账户密码
+    path: user-password-change/PRD.md

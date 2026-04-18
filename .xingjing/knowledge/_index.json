@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "bh-conventions",
+      "source": "behavior",
+      "title": "conventions",
+      "summary": "# 知识管理规约（Solo 模式）\n\n> **调用时机**：在生成任何文档前 MUST 调用本 Skill。\n\n## 目录结构\n\n| 区域 | 路径 | 职责 |\n|------|------|------|\n| 活文档 | `product/` | 产品当前全貌（PRD / SDD / 功能索引 / Roadmap） |\n| 增量文档 | `iterations/` | 执行过程（假设 / 任务",
+      "tags": [],
+      "category": "best-practice",
+      "applicableScenes": [],
+      "lifecycle": "living"
+    },
+    {
+      "id": "doc-hypothesis-iterations-hypotheses-h-001-limit-right-wrong",
+      "source": "workspace-doc",
+      "title": "未命名文档",
+      "summary": "",
+      "tags": [],
+      "category": "process-delivery",
+      "applicableScenes": [
+        "product-planning"
+      ],
+      "docType": "Hypothesis",
+      "layer": "iterations",
+      "owner": "product-brain",
+      "upstream": [],
+      "downstream": [],
+      "lifecycle": "living",
+      "date": "2026-04-18T02:10:00.430Z",
+      "filePath": "iterations/hypotheses//H-001-limit-right-wrong.md"
+    }
+  ],
+  "tagIndex": {},
+  "sceneIndex": {
+    "product-planning": [
+      "doc-hypothesis-iterations-hypotheses-h-001-limit-right-wrong"
+    ]
+  },
+  "docTypeIndex": {
+    "Hypothesis": [
+      "doc-hypothesis-iterations-hypotheses-h-001-limit-right-wrong"
+    ]
+  },
+  "layerIndex": {
+    "iterations": [
+      "doc-hypothesis-iterations-hypotheses-h-001-limit-right-wrong"
+    ]
+  },
+  "invertedIndex": {
+    "conventions": [
+      "bh-conventions"
+    ],
+    "知识管理规约": [
+      "bh-conventions"
+    ],
+    "solo": [
+      "bh-conventions"
+    ],
+    "模式": [
+      "bh-conventions"
+    ],
+    "调用时机": [
+      "bh-conventions"
+    ],
+    "在生成任何文档前": [
+      "bh-conventions"
+    ],
+    "must": [
+      "bh-conventions"
+    ],
+    "调用本": [
+      "bh-conventions"
+    ],
+    "skill": [
+      "bh-conventions"
+    ],
+    "目录结构": [
+      "bh-conventions"
+    ],
+    "区域": [
+      "bh-conventions"
+    ],
+    "路径": [
+      "bh-conventions"
+    ],
+    "职责": [
+      "bh-conventions"
+    ],
+    "活文档": [
+      "bh-conventions"
+    ],
+    "product": [
+      "bh-conventions"
+    ],
+    "产品当前全貌": [
+      "bh-conventions"
+    ],
+    "prd": [
+      "bh-conventions"
+    ],
+    "sdd": [
+      "bh-conventions"
+    ],
+    "功能索引": [
+      "bh-conventions"
+    ],
+    "roadmap": [
+      "bh-conventions"
+    ],
+    "未命名文档": [
+      "doc-hypothesis-iterations-hypotheses-h-001-limit-right-wrong"
+    ]
+  },
+  "builtAt": "2026-04-18T02:10:01.060Z"
+}

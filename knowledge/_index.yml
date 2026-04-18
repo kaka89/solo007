@@ -1,0 +1,47 @@
+items:
+  # ── 已有知识（保留） ──
+  - id: note-mo2qtnzb
+    title: 不能够给用户推送大段的消息
+    category: pitfall
+    tags: []
+    createdAt: 2026-04-17
+
+  # ── Mock 测试数据 ──
+  - id: K-001
+    title: ProseMirror IME 输入光标丢失
+    category: pitfall
+    tags: [ProseMirror, IME, 中文输入]
+    feature: paragraph-rewrite
+    createdAt: 2026-04-08
+
+  - id: K-002
+    title: Vercel Serverless 冷启动超时
+    category: pitfall
+    tags: [Vercel, Serverless, OpenAI]
+    createdAt: 2026-03-28
+
+  - id: K-003
+    title: 用户实际使用时间集中在晚间
+    category: user-insight
+    tags: [用户行为, 推送策略]
+    feature: daily-writing-reminder
+    createdAt: 2026-04-02
+
+  - id: K-004
+    title: 首次使用放弃率在第 3 步骤
+    category: user-insight
+    tags: [Onboarding, 转化率]
+    createdAt: 2026-03-30
+
+  - id: K-005
+    title: Supabase RLS 策略最佳实践
+    category: tech-note
+    tags: [Supabase, RLS, 安全]
+    createdAt: 2026-03-18
+
+  - id: K-006
+    title: TipTap Extension 的正确开发姿势
+    category: tech-note
+    tags: [TipTap, ProseMirror, Extension]
+    feature: paragraph-rewrite
+    createdAt: 2026-02-25

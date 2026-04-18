@@ -1,0 +1,26 @@
+[
+  {
+    "id": "hypothesis-iterations-hypotheses-h-001-limit-right-wrong",
+    "docType": "Hypothesis",
+    "category": "process-delivery",
+    "layer": "iterations",
+    "title": "未命名文档",
+    "summary": "",
+    "tags": [],
+    "filePath": "iterations/hypotheses//H-001-limit-right-wrong.md",
+    "owner": "product-brain",
+    "upstream": [],
+    "downstream": [],
+    "frontmatter": {
+      "id": "H-001-limit-right-wrong",
+      "status": "testing",
+      "belief": "额度是非得失",
+      "why": "",
+      "method": "大防守打法",
+      "impact": "medium",
+      "createdAt": "2026-04-17"
+    },
+    "lifecycle": "living",
+    "indexedAt": "2026-04-18T02:02:58.287Z"
+  }
+]

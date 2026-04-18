@@ -1,0 +1,13 @@
+id: T-001
+title: 修复 Editor 光标丢失 bug
+feature: paragraph-rewrite
+type: dev
+status: doing
+est: 3h
+dod:
+  - 复现稳定
+  - 修复并通过本地测试
+  - 部署到生产
+createdAt: 2026-04-08
+note: >
+  Prosemirror selection state 在 IME 输入后丢失，已定位到 handleKeyDown

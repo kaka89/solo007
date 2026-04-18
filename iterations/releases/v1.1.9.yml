@@ -1,0 +1,10 @@
+version: v1.1.9
+date: 2026-03-15
+env: prod
+status: success
+deployTime: 1m 44s
+features:
+  - citation-check
+  - outline-generation
+summary: 引用检查功能上线，大纲生成优化
+tasks: []

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "deepseek/deepseek-chat",
+  "default_agent": "openwork",
+  "plugin": [
+    "opencode-scheduler"
+  ],
+  "mcp": {
+    "control-chrome": {
+      "type": "local",
+      "command": [
+        "chrome-devtools-mcp"
+      ]
+    }
+  }
+}
